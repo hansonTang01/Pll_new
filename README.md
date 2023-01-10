@@ -15,33 +15,27 @@ This repo implements PrunedLandmarkLabeling that calculates the shortest distanc
 ### 模块
 本仓库分为以下五个模块：
 - utils.py：该文件包含了生成order、BFS构建label、俩跳计数等所有工具函数。
-- BFS.py: 给定一个order，基于该order进行BFS
-- gen_order.py: 选择一种centrality，计算出order
+- BFS_specified_order.py: 给定一个order，基于该order进行BFS
 - script.py: 将所有流程聚在一起，一键运行
 - dataset文件夹： 数据集，包含了几个部分：
   - excel：结果转换为excel表存放在这里面
   - hop_count: 俩跳计数的结果放在里面
+  - betweenness: betweenness的值放在里面
   - order：生成的节点order放在里面
+  - map_file: OSM的图数据
 
-### 运行指令(以macau为例)
+### 运行指令(以macau.map为例)
 
 **script.py**
 ```bash
 python script.py -i [input_file]
-e.g: python script.py -i macau
+e.g: python script.py -i macau.map
 # 最常用，完成从基于各种策略生成order，到BFS，到将结果输出到excel的所有流程
-```
-
-**gen_order.py**
-```bash
-python gen_order.py -i [input_file] -m mode
-e.g: python gen_order.py -i macau -m degree
-# 基于某种策略计算order，degree可以换成其他策略
 ```
 
 **BFS.py**
 ```bash
-python BFS.py -i [input_file] -m [mode]
-e.g: python BFS.py -i macau -m degree
-# 基于某种策略进行order，mode如果为user_define,则会取./dataset/order/xxx_user_define_order.txt的文件内的order，该文件内的order由用户定义并输入
+python BFS.py -i [input_file]
+e.g: python BFS.py -i macau.map
+# 基于用户输入的order进行BFS, 在此之前，用户需要先将指定的order输入/Pll/order/user_define/specified_order中
 ```
